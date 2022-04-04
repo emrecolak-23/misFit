@@ -1,6 +1,8 @@
 exports.getHomePage = (req, res) => {
   try {
-    res.status(200).render('index');
+    res.status(200).render('index', {
+      page_name: 'index'
+    });
   } catch(error) {
     res.status(400).json({
       status: 'Home Page not loaded',
@@ -11,7 +13,9 @@ exports.getHomePage = (req, res) => {
 
 exports.getAboutPage = (req, res) => {
   try{
-    res.status(200).render('about');
+    res.status(200).render('about', {
+      page_name: 'about'
+    });
   } catch(error) {
     res.status(400).json({
       status: 'About Page not loaded',
@@ -20,20 +24,12 @@ exports.getAboutPage = (req, res) => {
   }
 }
 
-exports.getServicePage = (req, res) => {
-  try{
-    res.status(200).render('service');
-  } catch(error) {
-    res.status(400).json({
-      status: 'Service Page not loaded',
-      error
-    })
-  }
-}
 
 exports.getTrainerPage = (req, res) => {
   try {
-    res.status(200).render('trainer');
+    res.status(200).render('trainer', {
+      page_name: 'trainer'
+    });
   } catch(error) {
     res.status(400).json({
       status: 'Trainer Page not loaded',
@@ -44,7 +40,9 @@ exports.getTrainerPage = (req, res) => {
 
 exports.getGalleryPage = (req, res) => {
   try {
-    res.status(200).render('gallery');
+    res.status(200).render('gallery', {
+      page_name: 'gallery'
+    });
   } catch(error) { 
     res.status(400).json({
       status: 'Gallery Page not loaded',
@@ -55,7 +53,9 @@ exports.getGalleryPage = (req, res) => {
 
 exports.getContactPage = (req, res) => {
   try {
-    res.status(200).render('contact')
+    res.status(200).render('contact', {
+      page_name: 'contact'
+    })
   } catch(error) {
     res.status(400).json({
       status: 'Contact Page not loaded',

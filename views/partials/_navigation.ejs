@@ -20,22 +20,22 @@
                  </button>
                  <div class="collapse navbar-collapse" id="navbarsExample04">
                     <ul class="navbar-nav mr-auto">
-                       <li class="nav-item active">
+                       <li class="nav-item <%= page_name=='index' && 'active'  %>">
                           <a class="nav-link" href="/">Home</a>
                        </li>
-                       <li class="nav-item">
+                       <li class="nav-item <%= page_name=='about' && 'active'  %>">
                           <a class="nav-link" href="/about">About</a>
                        </li>
-                       <li class="nav-item">
-                          <a class="nav-link" href="/service">Services</a>
+                       <li class="nav-item <%= page_name=='workout' && 'active'  %>">
+                          <a class="nav-link" href="/workout">Workouts</a>
                        </li>
-                       <li class="nav-item">
+                       <li class="nav-item <%= page_name=='trainer' && 'active'  %>">
                           <a class="nav-link" href="/trainer">Trainer</a>
                        </li>
-                       <li class="nav-item">
+                       <li class="nav-item <%= page_name=='gallery' && 'active'  %>">
                           <a class="nav-link" href="/gallery">Gallery</a>
                        </li>
-                       <li class="nav-item">
+                       <li class="nav-item <%= page_name=='contact' && 'active' %>">
                           <a class="nav-link" href="/contact">Contact Us</a>
                        </li>
                     </ul>

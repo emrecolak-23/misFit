@@ -13,9 +13,6 @@ router.route('/').get(PageController.getHomePage);
 // About Page
 router.route('/about').get(PageController.getAboutPage);
 
-// Services Page
-router.route('/service').get(PageController.getServicePage);
-
 // Trainer Page
 router.route('/trainer').get(PageController.getTrainerPage);
 

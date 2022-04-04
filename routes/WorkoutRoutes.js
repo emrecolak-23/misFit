@@ -10,4 +10,6 @@ const router = express.Router();
 // POST routes
 router.route('/').post(WorkoutController.createWorkout);
 
+router.route('/').get(WorkoutController.getAllWorkout);
+
 module.exports = router
