@@ -63,3 +63,29 @@ exports.getContactPage = (req, res) => {
     })
   }
 }
+
+exports.getLoginPage = (req, res) => {
+  try {
+    res.status(200).render('login', {
+      page_name: 'Login'
+    })
+  } catch(error) {
+    res.status(400).json({
+      status: 'Login Page not loaded',
+      error
+    })
+  }
+}
+
+exports.getRegisterPage = (req, res) => {
+  try {
+    res.status(200).render('register', {
+      page_name: 'register'
+    })
+  } catch(error) {
+    res.status(400).json({
+      status: 'Register Page not loaded',
+      error
+    })
+  }
+}

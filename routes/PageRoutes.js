@@ -22,4 +22,10 @@ router.route('/gallery').get(PageController.getGalleryPage);
 // Contact page
 router.route('/contact').get(PageController.getContactPage);
 
+// Login page
+router.route('/login').get(PageController.getLoginPage);
+
+// Register page
+router.route('/register').get(PageController.getRegisterPage);
+
 module.exports = router

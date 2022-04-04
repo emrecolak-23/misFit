@@ -22,7 +22,7 @@ exports.getAllWorkout = async (req, res) => {
     console.log(workouts);
     res.status(200).render('workout', {
       page_name: 'workout',
-      workouts
+      workouts,
     });
   } catch (error) {
     res.status(400).json({
@@ -33,18 +33,18 @@ exports.getAllWorkout = async (req, res) => {
 };
 
 exports.getWorkout = async (req, res) => {
-  try { 
-
-    const workout = await Workout.findOne({slug:req.params.slug});
+  try {
+    const workout = await Workout.findOne({ slug: req.params.slug }).populate(
+      'category'
+    );
     res.status(200).render('workout-single', {
       page_name: 'workout',
-      workout
-    })
-
-  } catch(error) {
+      workout,
+    });
+  } catch (error) {
     res.status(400).json({
       status: 'Something went wrong',
-      error
-    })
+      error,
+    });
   }
-}
+};
