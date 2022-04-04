@@ -35,7 +35,7 @@ exports.getAllWorkout = async (req, res) => {
 exports.getWorkout = async (req, res) => {
   try { 
 
-    const workout = await Workout.findById({_id:req.params.id});
+    const workout = await Workout.findOne({slug:req.params.slug});
     res.status(200).render('workout-single', {
       page_name: 'workout',
       workout

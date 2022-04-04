@@ -12,6 +12,6 @@ router.route('/').post(WorkoutController.createWorkout);
 
 router.route('/').get(WorkoutController.getAllWorkout);
 
-router.route('/:id').get(WorkoutController.getWorkout);
+router.route('/:slug').get(WorkoutController.getWorkout);
 
 module.exports = router
