@@ -31,3 +31,20 @@ exports.getAllWorkout = async (req, res) => {
     });
   }
 };
+
+exports.getWorkout = async (req, res) => {
+  try { 
+
+    const workout = await Workout.findById({_id:req.params.id});
+    res.status(200).render('workout-single', {
+      page_name: 'workout',
+      workout
+    })
+
+  } catch(error) {
+    res.status(400).json({
+      status: 'Something went wrong',
+      error
+    })
+  }
+}
