@@ -1,6 +1,7 @@
 // Import Packages
 const express = require('express');
 const ejs = require('ejs');
+const mongoose = require('mongoose');
 
 // Import Routers
 const PageRouter = require('./routes/PageRoutes');
@@ -18,6 +19,22 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 
 // Routes
 app.use('/', PageRouter);
+
+// DB Connect
+const dbURI =
+  "mongodb+srv://emco:emco3232@nodetuts.iuulr.mongodb.net/misFitApp?retryWrites=true&w=majority";
+mongoose
+  .connect(dbURI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((result) => {
+    console.log("Db connected");
+  })
+  .catch((err) => {
+    console.log(err);
+  });
+
 
 // Declare Port
 const PORT = 16000;
