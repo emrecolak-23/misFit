@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 // Import Routers
 const PageRouter = require('./routes/PageRoutes');
 const WorkoutRouter = require('./routes/WorkoutRoutes');
+const CategoryRouter = require('./routes/CategoryRoutes');
 
 // Declare Express App
 const app = express();
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true })); // for parsing application/x-ww
 // Routes
 app.use('/', PageRouter);
 app.use('/workout', WorkoutRouter);
+app.use('/category', CategoryRouter);
 
 // DB Connect
 const dbURI =
