@@ -36,4 +36,8 @@ router.route('/').get(WorkoutController.getAllWorkout);
 
 router.route('/:slug').get(WorkoutController.getWorkout);
 
+router.route('/enroll').post(WorkoutController.enrollWorkout);
+
+router.route('/release').post(WorkoutController.releaseWorkout);
+
 module.exports = router;

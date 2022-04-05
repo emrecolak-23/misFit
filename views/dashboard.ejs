@@ -109,4 +109,43 @@
 
 <% } %> 
 
+<% if(user.role=='member') { %> 
+  <div class="back_re">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="title">
+            <h2><%= user.name %></h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div  class="services">
+    <div class="container">
+       <div class="row">
+          <div class="col-md-12">
+             <div class="titlepage">
+                <p>You can follow the workouts you have registered.</p>
+             </div>
+          </div>
+       </div>
+       <div class="row">
+          <% for (let i = 0; i<user.workouts.length;i++) { %> 
+          <div class="col-md-4">
+          <a href="/workout/<%= user.workouts[i].slug %>">   
+             <div class="se_img">
+                <figure><img src="/<%= user.workouts[i].image  %>" alt="#"/></figure>
+             </div>
+             <div class="text-center">
+               <h3 class="text-white"><%= user.workouts[i].name %></h3>
+             </div>
+          </a>
+          </div>
+          <% } %> 
+       </div>
+    </div>
+ </div>
+<% } %> 
+
 <%- include('partials/_footer') %>

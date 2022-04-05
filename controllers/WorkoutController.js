@@ -1,4 +1,5 @@
 // Import Model
+const User = require('../models/User');
 const Workout = require('../models/Workout');
 
 exports.createWorkout = async (req, res) => {
@@ -37,9 +38,11 @@ exports.getWorkout = async (req, res) => {
     const workout = await Workout.findOne({ slug: req.params.slug })
     .populate('category')
     .populate('user');
+    const user = await User.findById(req.session.userID);
     res.status(200).render('workout-single', {
       page_name: 'workout',
       workout,
+      user
     });
   } catch (error) {
     res.status(400).json({
@@ -48,3 +51,25 @@ exports.getWorkout = async (req, res) => {
     });
   }
 };
+
+exports.enrollWorkout = async (req, res) => {
+  try {
+    const user = await User.findById(req.session.userID);
+    await user.workouts.push({_id:req.body.workout_id})
+    await user.save();
+    res.status(201).redirect('/user/dashboard');
+  } catch(error) {
+    res.status(400).redirect('/user/dashboard');
+  }
+}
+
+exports.releaseWorkout = async (req, res) => {
+  try {
+    const user = await User.findById(req.session.userID);
+    await user.workouts.pull({_id:req.body.workout_id});
+    await user.save();
+    res.status(201).redirect('/user/dashboard');
+  } catch(error) {
+    res.status(400).redirect('/user/dashboard');
+  }
+}

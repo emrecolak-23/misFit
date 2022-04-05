@@ -19,6 +19,17 @@
      <div class="row">
         <div class="col-md-12">
            <div class="titlepage">
+            <% if (user.role=='member' &&  !user.workouts.includes(workout._id)) { %> 
+              <form class="mb-3" method="post" action="/workout/enroll">
+                  <input type="hidden" name="workout_id" value="<%= workout._id %>">
+                  <button class="btn btn-sm btn-warning text-white">ENROLL</button>
+              </form>
+            <% } else if (user.role=='member' && user.workouts.includes(workout._id)) {%>
+               <form class="mb-3" method="post" action="/workout/release">
+                  <input type="hidden" name="workout_id" value="<%= workout._id %>">
+                  <button class="btn btn-sm btn-danger text-white">RELEASE</button>
+              </form>
+            <% } %>    
               <h3 class="text-white">Category: <span><%= workout.category.name  %></span></h3>
               <h3 class="text-white">Trainer: <span><%= workout.user.name  %></span></h3>
               <p><%=  workout.description %></p>

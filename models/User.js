@@ -26,6 +26,10 @@ const UserSchema = new Schema({
     enum: ['member', 'trainer', 'admin'],
     default: 'member',
   },
+  workouts: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Workout'
+  }]
 });
 
 UserSchema.pre('save', function (next) {
