@@ -7,7 +7,8 @@ exports.createWorkout = async (req, res) => {
       name: req.body.name,
       description: req.body.description,
       image: req.file.filename,
-      category: req.body.category
+      category: req.body.category,
+      user: req.session.userID
     });
     res.status(201).redirect('/user/dashboard')
   } catch (error) {
@@ -33,9 +34,9 @@ exports.getAllWorkout = async (req, res) => {
 
 exports.getWorkout = async (req, res) => {
   try {
-    const workout = await Workout.findOne({ slug: req.params.slug }).populate(
-      'category'
-    );
+    const workout = await Workout.findOne({ slug: req.params.slug })
+    .populate('category')
+    .populate('user');
     res.status(200).render('workout-single', {
       page_name: 'workout',
       workout,

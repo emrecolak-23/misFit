@@ -28,7 +28,7 @@ let upload = multer({
 router
   .route('/')
   .post(
-    [RoleMiddlewares(['trainer', 'admin']), upload],
+    upload,
     WorkoutController.createWorkout
   );
 
