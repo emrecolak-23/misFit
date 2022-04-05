@@ -2,6 +2,7 @@
 const express = require('express');
 const ejs = require('ejs');
 const mongoose = require('mongoose');
+const session = require('express-session');
 
 // Import Routers
 const PageRouter = require('./routes/PageRoutes');
@@ -14,10 +15,22 @@ const app = express();
 // Template Engine
 app.set('view engine', 'ejs');
 
+// Global Variable
+global.userIN = null;
+
 // Middlewares
 app.use(express.static('public'));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(session({
+  secret: "my-secret-value",
+  resave: false,
+  saveUninitialized: true
+}));
+app.use('*', (req, res, next) => {
+  userIN = req.session.userID;
+  next();
+});
 
 // Routes
 app.use('/', PageRouter);
