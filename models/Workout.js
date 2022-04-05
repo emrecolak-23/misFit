@@ -16,6 +16,9 @@ const WorkoutSchema = new Schema({
     type: String,
     required: true
   },
+  image: {
+    type: String,
+  },
   slug: {
     type: String,
     unique: true

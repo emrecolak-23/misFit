@@ -3,16 +3,15 @@ const Workout = require('../models/Workout');
 
 exports.createWorkout = async (req, res) => {
   try {
-    const workout = await Workout.create(req.body);
-    res.status(201).json({
-      status: 'Workout successfuly created',
-      workout,
+    const workout = await Workout.create({
+      name: req.body.name,
+      description: req.body.description,
+      image: req.file.filename,
+      category: req.body.category
     });
+    res.status(201).redirect('/user/dashboard')
   } catch (error) {
-    res.status(400).json({
-      status: 'Something went wrong',
-      error,
-    });
+    res.status(400).redirect('/user/dashboard')
   }
 };
 
