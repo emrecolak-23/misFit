@@ -10,27 +10,32 @@ const UserSchema = new Schema({
   name: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   email: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
   },
   password: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+  role: {
+    type: String,
+    enum: ['member', 'trainer', 'admin'],
+    default: 'member',
+  },
+});
 
-UserSchema.pre('save', function(next){
+UserSchema.pre('save', function (next) {
   const user = this;
-  bcrypt.hash(user.password, 10, function(error, hashed){
-    if(error) throw error
-    user.password = hashed
+  bcrypt.hash(user.password, 10, function (error, hashed) {
+    if (error) throw error;
+    user.password = hashed;
     next();
-  })
-})
+  });
+});
 
 // Create User Model
 const User = mongoose.model('User', UserSchema);
