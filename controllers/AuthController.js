@@ -4,9 +4,9 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Category = require('../models/Category');
 
-exports.registerUser = (req, res) => {
+exports.registerUser = async (req, res) => {
   try {
-    const user = User.create(req.body);
+    const user = await User.create(req.body);
     res.status(200).redirect('/login');
   } catch (error) {
     res.status(400).redirect('/register');
