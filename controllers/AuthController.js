@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt');
 // Import Model
 const User = require('../models/User');
+const Category = require('../models/Category');
 
 exports.registerUser = (req, res) => {
   try {
@@ -22,7 +23,7 @@ exports.loginUser = async (req, res) => {
       bcrypt.compare(password, user.password, (err, same) => {
         if (same) {
           req.session.userID = user._id;
-          res.status(200).redirect('/gallery');
+          res.status(200).redirect('/user/dashboard');
         } else {
           res.status(400).redirect('/login');
         }
@@ -43,5 +44,22 @@ exports.logout = (req, res) => {
     })
   } catch(error) {
     res.status(400).redirect('/')
+  }
+}
+
+exports.getDashboardPage = async (req, res) => {
+  try {
+
+    const user = await User.findOne({_id: req.session.userID});
+    const categories = await Category.find();
+
+    res.status(200).render('dashboard', {
+      page_name: 'dashboard',
+      user,
+      categories
+    })
+
+  } catch(error) {
+    res.status(400).redirect('/login')
   }
 }

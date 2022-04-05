@@ -1,0 +1,106 @@
+<%- include('partials/_header') %> <%- include('partials/_navigation') %>
+
+<div class="back_re">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="title">
+          <h2><%= user.name %></h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="services">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="titlepage">
+          <!-- Button trigger modal -->
+          <button
+            type="button"
+            class="btn btn-success"
+            data-toggle="modal"
+            data-target="#addWorkout"
+          >
+            Create New Workout
+          </button>
+          <!-- Modal -->
+          <div
+            class="modal fade"
+            id="addWorkout"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="myModalLabel"
+          >
+            <div
+              class="modal-dialog modal-dialog-centered modal-lg"
+              role="document"
+            >
+              <div class="modal-content">
+                <div class="modal-body customer-box">
+                  <!-- Tab Panes -->
+                  <div class="tab-content">
+                    <div class="tab-pane active" id="Login">
+                      <form
+                        method="post"
+                        action="/workout"
+                        class="tm-contact-form"
+                        enctype="multipart/form-data"
+                      >
+                        <div class="form-group mb-3">
+                          <input
+                            type="text"
+                            name="name"
+                            class="form-control rounded-0"
+                            placeholder="Workout Name"
+                            required
+                          />
+                        </div>
+                          <div class="form-group mb-3">
+                            <select name="category" class="form-control">
+                              <option value="" disabled selected>Select category</option>    
+                              <% for(let i = 0; i<categories.length; i++) { %> 
+                              <option value="<%= categories[i]._id %>"><%= categories[i].name %> </option>
+                              <% } %> 
+                              </select>
+                          </div>
+                        <div class="form-group mb-3">
+                          <textarea
+                            rows="8"
+                            name="description"
+                            class="form-control rounded-0"
+                            placeholder="Workout Description"
+                            required
+                          ></textarea>
+                        </div>
+                        <div class="form-group mb-3">
+                          <input
+                            type="file"
+                            name="image"
+                            class="form-control-file rounded-0"
+                          />
+                        </div>
+                        <div class="form-group mb-0">
+                          <button
+                            type="submit"
+                            class="btn btn-primary rounded-0 d-block ml-auto mr-0 tm-btn-animate tm-btn-submit tm-icon-submit"
+                          >
+                            <span>Add</span>
+                          </button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('partials/_footer') %>
