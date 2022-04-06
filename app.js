@@ -4,6 +4,7 @@ const ejs = require('ejs');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
+const methodOverride = require('method-override');
 // Import Routers
 const PageRouter = require('./routes/PageRoutes');
 const WorkoutRouter = require('./routes/WorkoutRoutes');
@@ -46,10 +47,14 @@ app.use(
     store: MongoStore.create({ mongoUrl: dbURI }),
   })
 );
+app.use(methodOverride('_method', {
+  methods: ['GET','POST']
+}));
 app.use('*', (req, res, next) => {
   userIN = req.session.userID;
   next();
 });
+
 
 // Routes
 app.use('/', PageRouter);

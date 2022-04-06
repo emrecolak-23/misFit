@@ -40,4 +40,6 @@ router.route('/enroll').post(WorkoutController.enrollWorkout);
 
 router.route('/release').post(WorkoutController.releaseWorkout);
 
+router.route('/:slug').delete(WorkoutController.deleteWorkout);
+
 module.exports = router;

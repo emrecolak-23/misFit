@@ -1,3 +1,5 @@
+// Import Packages
+const fs = require('fs')
 // Import Model
 const User = require('../models/User');
 const Workout = require('../models/Workout');
@@ -68,6 +70,17 @@ exports.releaseWorkout = async (req, res) => {
     const user = await User.findById(req.session.userID);
     await user.workouts.pull({_id:req.body.workout_id});
     await user.save();
+    res.status(201).redirect('/user/dashboard');
+  } catch(error) {
+    res.status(400).redirect('/user/dashboard');
+  }
+}
+
+exports.deleteWorkout = async (req, res) => {
+  try {
+    const workout = await Workout.findOneAndRemove({slug:req.params.slug});
+    let deletedImage = __dirname + "/../uploads/" + workout.image;
+    fs.unlinkSync(deletedImage);
     res.status(201).redirect('/user/dashboard');
   } catch(error) {
     res.status(400).redirect('/user/dashboard');

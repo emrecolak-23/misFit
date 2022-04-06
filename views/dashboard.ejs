@@ -37,6 +37,20 @@
                  <h3 class="text-white"><%= workouts[i].name %></h3>
                </div>
             </a>
+            <div class="clearfix">
+              <ul style="list-style-type: none;">
+                <li style="float: left;"><button class="btn btn-warning rounded-10 text-white"
+                  data-toggle="modal" data-target="#updateCourse<%= workouts[i]._id  %>"
+                  >
+                  <span>UPDATE</span>
+                </button></li>
+                <li style="float: right;"><a href="/workout/<%= workouts[i].slug %>?_method=DELETE" 
+                  onclick="return confirm('Are you sure?')"
+                  class="btn btn-danger rounded-10 text-white">
+                  DELETE
+                </a></li>
+              </ul>
+            </div>
             </div>
             <% } %> 
           <!-- Modal -->
