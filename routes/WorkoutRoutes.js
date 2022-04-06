@@ -7,6 +7,7 @@ const WorkoutController = require('../controllers/WorkoutController');
 
 // Import Middlewares
 const RoleMiddlewares = require('../middlewares/rolemiddlewares');
+const { put } = require('./PageRoutes');
 
 // Create express router
 const router = express.Router();
@@ -40,6 +41,7 @@ router.route('/enroll').post(WorkoutController.enrollWorkout);
 
 router.route('/release').post(WorkoutController.releaseWorkout);
 
-router.route('/:slug').delete(WorkoutController.deleteWorkout);
+router.route('/:slug').delete(WorkoutController.deleteWorkout)
+                      .put(WorkoutController.updateWorkout);
 
 module.exports = router;
