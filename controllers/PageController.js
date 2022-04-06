@@ -1,4 +1,6 @@
+// Import Models
 const User = require("../models/User");
+const Workout = require('../models/Workout');
 
 exports.getHomePage = (req, res) => {
   try {
@@ -42,8 +44,20 @@ exports.getTrainerPage = async (req, res) => {
   }
 }
 
-exports.getSingleTrainer = (req, res) => {
-  
+exports.getSingleTrainer = async (req, res) => {
+  try {
+    const trainer = await User.findById(req.params.id);
+    const workouts = await Workout.find({user:req.params.id});
+    const user = await User.findById(req.session.userID);
+    res.status(200).render('trainer-single', {
+      page_name: 'trainer',
+      trainer,
+      user,
+      workouts
+    })
+  } catch(error) {
+
+  }
 }
 
 exports.getGalleryPage = (req, res) => {
