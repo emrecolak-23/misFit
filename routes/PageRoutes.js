@@ -18,7 +18,7 @@ router.route('/about').get(PageController.getAboutPage);
 
 // Trainer Page
 router.route('/trainer').get(PageController.getTrainerPage);
-
+router.route('/trainer/:id').get(PageController.getSingleTrainer);
 // Gallery Page
 router.route('/gallery').get(PageController.getGalleryPage);
 

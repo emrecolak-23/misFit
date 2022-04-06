@@ -67,3 +67,18 @@ exports.getDashboardPage = async (req, res) => {
     res.status(400).redirect('/login')
   }
 }
+
+exports.uploadProfileImage = async (req, res) => {
+  try {
+    const user = await User.findOneAndUpdate({_id:req.session.userID}, {
+      image: req.file.filename
+    });
+    await user.save();
+    res.status(201).redirect('/user/dashboard');
+  } catch(error) {
+    res.status(400).json({
+      status: 'not uploaded',
+      error
+    })
+  }
+}

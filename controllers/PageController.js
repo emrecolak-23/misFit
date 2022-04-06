@@ -1,3 +1,5 @@
+const User = require("../models/User");
+
 exports.getHomePage = (req, res) => {
   try {
     res.status(200).render('index', {
@@ -24,11 +26,13 @@ exports.getAboutPage = (req, res) => {
   }
 }
 
-
-exports.getTrainerPage = (req, res) => {
+exports.getTrainerPage = async (req, res) => {
   try {
+
+    const trainers = await User.find({role:'trainer'});
     res.status(200).render('trainer', {
-      page_name: 'trainer'
+      page_name: 'trainer',
+      trainers
     });
   } catch(error) {
     res.status(400).json({
@@ -36,6 +40,10 @@ exports.getTrainerPage = (req, res) => {
       error
     })
   }
+}
+
+exports.getSingleTrainer = (req, res) => {
+  
 }
 
 exports.getGalleryPage = (req, res) => {

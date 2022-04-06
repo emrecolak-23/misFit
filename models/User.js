@@ -26,6 +26,9 @@ const UserSchema = new Schema({
     enum: ['member', 'trainer', 'admin'],
     default: 'member',
   },
+  image: {
+    type: String
+  },
   workouts: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Workout'
