@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 // Import Model
 const User = require('../models/User');
 const Category = require('../models/Category');
-
+const Workout = require('../models/Workout');
+ 
 exports.registerUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
@@ -53,10 +54,13 @@ exports.getDashboardPage = async (req, res) => {
     const user = await User.findOne({_id: req.session.userID}).populate('workouts');
     const categories = await Category.find();
 
+    const workouts = await Workout.find({user:req.session.userID});
+
     res.status(200).render('dashboard', {
       page_name: 'dashboard',
       user,
-      categories
+      categories,
+      workouts
     })
 
   } catch(error) {
