@@ -16,14 +16,14 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6">
-        <form id="request" class="main_form">
+        <form method="post" action="/contact" class="main_form">
           <div class="row">
             <div class="col-md-12">
               <input
                 class="contactus"
                 placeholder="Your Name"
                 type="type"
-                name="Your Name"
+                name="name"
               />
             </div>
             <div class="col-md-12">
@@ -31,7 +31,7 @@
                 class="contactus"
                 placeholder="Email"
                 type="type"
-                name="Email"
+                name="email"
               />
             </div>
             <div class="col-md-12">
@@ -39,7 +39,7 @@
                 class="contactus"
                 placeholder="Phone Number"
                 type="type"
-                name="Phone Number"
+                name="phone"
               />
             </div>
             <div class="col-md-12">
@@ -47,7 +47,7 @@
                 class="contactus"
                 placeholder="Subject"
                 type="type"
-                name="Subject"
+                name="subject"
               />
             </div>
             <div class="col-md-12">
@@ -55,10 +55,8 @@
                 class="textarea"
                 placeholder="Message"
                 type="type"
-                Message="Name"
-              >
-Message</textarea
-              >
+                name="message"
+              >Message</textarea>
             </div>
             <div class="col-md-12">
               <button class="send_btn">Send</button>
