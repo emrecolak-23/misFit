@@ -3,6 +3,7 @@ const nodemailer = require('nodemailer');
 // Import Models
 const User = require('../models/User');
 const Workout = require('../models/Workout');
+const Gallery = require('../models/Gallery');
 
 exports.getHomePage = (req, res) => {
   try {
@@ -59,10 +60,12 @@ exports.getSingleTrainer = async (req, res) => {
   } catch (error) {}
 };
 
-exports.getGalleryPage = (req, res) => {
+exports.getGalleryPage = async (req, res) => {
   try {
+    const images = await Gallery.find();
     res.status(200).render('gallery', {
       page_name: 'gallery',
+      images
     });
   } catch (error) {
     res.status(400).json({

@@ -25,7 +25,7 @@ router.route('/gallery').get(PageController.getGalleryPage);
 // Contact page
 router.route('/contact').get(PageController.getContactPage)
                         .post(PageController.sendEmail);
-                        
+
 // Login page
 router.route('/login').get(RedirectMiddlewares,PageController.getLoginPage);
 
