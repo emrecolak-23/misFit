@@ -31,5 +31,6 @@ router.route('/login').post(AuthController.loginUser);
 router.route('/logout').get(AuthController.logout);
 router.route('/dashboard').get(AuthMiddlewares,AuthController.getDashboardPage);
 router.route('/upload').put(upload,AuthController.uploadProfileImage);
+router.route('/:id').delete(AuthController.deleteUser);
 
 module.exports = router;

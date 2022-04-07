@@ -301,7 +301,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="title">
-            <h2><%= user.name %></h2>
+            <h2><%= user.role %></h2>
           </div>
         </div>
       </div>
@@ -330,85 +330,50 @@
               Upload Image
             </button>
             <div class="row">
-              <% for (let i = 0; i<workouts.length;i++) { %> 
-                <div class="col-md-4">
-                <a href="/workout/<%= workouts[i].slug %>">   
-                   <div class="se_img">
-                      <figure><img src="/<%= workouts[i].image  %>" alt="#"/></figure>
-                   </div>
-                   <div class="text-center">
-                     <h3 class="text-white"><%= workouts[i].name.substring(0,30)+ "..." %></h3>
-                   </div>
-                </a>
-                <div class="clearfix">
-                  <ul style="list-style-type: none;">
-                    <li style="float: left;"><button class="btn btn-warning rounded-10 text-white"
-                      data-toggle="modal" data-target="#updateWorkout<%= workouts[i]._id  %>"
-                      >
-                      <span>UPDATE</span>
-                    </button>
-                  </li>
-                    <li style="float: right;"><a href="/workout/<%= workouts[i].slug %>?_method=DELETE" 
-                      onclick="return confirm('Are you sure?')"
-                      class="btn btn-danger rounded-10 text-white">
-                      DELETE
-                    </a></li>
-                  </ul>
-                </div>
-                </div>
-                 <!-- Update Modal-->
-                <div class="modal fade" id="updateWorkout<%= workouts[i]._id  %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-body customer-box">
-                          <!-- Tab Panes -->
-                          <div class="tab-content">
-                            <div class="tab-pane active" id="Login">
-                              <form method="post" action="/workout/<%= workouts[i].slug  %>?_method=PUT" class="form-horizontal">
-                                  <div class="form-group">
-                                    <div class="col-sm-12">
-                                      <input type="text" name="name" class="form-control" value="<%= workouts[i].name  %>">
-                                      </div>
-                                    </div>
-                                    <div class="col-sm-12">
-                                      <input type="hidden" name="role" class="form-control"  value="<%= user.role%>" >
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <div class="col-sm-12">
-                                        <textarea name="description" class="form-control" cols="30" rows="8"
-                                        required
-                                        ><%= workouts[i].description  %></textarea>
-                                      </div>
-                                    </div>
-                                    <div class="form-group">
-                                      <div class="col-sm-12">
-                                        <select name="category" class="form-control">  
-                                          <% for(let i = 0; i<categories.length; i++) { %> 
-                                          <option value="<%= categories[i]._id %>"><%= categories[i].name %> </option>
-                                          <% } %> 
-                                          </select>
-                                        </div>
-                                      </div>
-                                    <div class="row">
-                                      <div class="col-sm-10">
-                                        <button type="submit" class="btn btn-success btn-radius btn-brd grd1">
-                                          UPDATE
-                                        </button>	
-                                        <button type="submit" class="btn btn-light btn-radius btn-brd grd1"
-                                          data-dismiss="modal" aria-hidden="true"
-                                        >
-                                          Cancel	
-                                        </button>
-                                      </div>	
-                                    </div>
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                      </div>
-                  </div>
-              <% } %> 
+              <h1 class="text-white">Users</h1> 
+              <table class="table">
+                <thead>
+                  <tr class="text-white">
+                    <th scope="col">ID#</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let i =0; i<users.length; i++) { %> 
+                  <tr class="text-white">
+                    <th scope="row"><%= users[i]._id %></th>
+                    <td><%= users[i].email %></td>
+                    <td><%= users[i].role %></td>
+                    <td><a onclick="return confirm('Are you sure?')" href="/user/<%= users[i]._id %>?_method=DELETE" class="btn btn-outline-danger btn-sm text-uppercase">Delete</a></td>
+                  </tr>
+                  <% } %> 
+                </tbody>
+              </table>
+
+              <h1 class="text-white">Category</h1> 
+              <table class="table">
+                <thead>
+                  <tr class="text-white">
+                    <th scope="col">ID#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Addd</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let i =0; i<categories.length; i++) { %> 
+                  <tr class="text-white">
+                    <th scope="row"><%= categories[i]._id %></th>
+                    <td><%= categories[i].name %></td>
+                    <td><a data-toggle="modal" data-target="#addCategory" class="btn btn-outline-warning btn-sm text-uppercase">Add</a></td>
+                    <td><a onclick="return confirm('Are you sure?')" href="/category/<%= categories[i]._id %>?_method=DELETE" class="btn btn-outline-danger btn-sm text-uppercase">Delete</a></td>
+                  </tr>
+                  <% } %> 
+                </tbody>
+              </table>
+
             </div>
             <!-- Add Workout Modal -->
             <div
@@ -512,6 +477,52 @@
                               type="file"
                               name="image"
                               class="form-control-file rounded-0"
+                            />
+                          </div>
+                          <div class="form-group mb-0">
+                            <button
+                              type="submit"
+                              class="btn btn-primary rounded-0 d-block ml-auto mr-0 tm-btn-animate tm-btn-submit tm-icon-submit"
+                            >
+                              <span>Add</span>
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Add New Category -->
+            <div
+              class="modal fade"
+              id="addCategory"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="myModalLabel"
+            >
+              <div
+                class="modal-dialog modal-dialog-centered modal-lg"
+                role="document"
+              >
+                <div class="modal-content">
+                  <div class="modal-body customer-box">
+                    <!-- Tab Panes -->
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="Login">
+                        <form
+                          method="post"
+                          action="/category"
+                          class="tm-contact-form"
+                        >
+                          <div class="form-group mb-3">
+                            <input
+                              type="text"
+                              name="category"
+                              class="form-control rounded-0"
+                              placeholder="Category Name"
+                              required
                             />
                           </div>
                           <div class="form-group mb-0">

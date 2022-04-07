@@ -3,11 +3,10 @@ const Category = require('../models/Category');
 
 exports.createCategory = async (req, res) => {
   try {
-    const category = await Category.create(req.body);
-    res.status(201).json({
-      status: `${category.name} successfully created`,
-      category,
+    const category = await Category.create({
+      name: req.body.category
     });
+    res.status(201).redirect('/user/dashboard');
   } catch (error) {
     res.status(400).json({
       status: 'Something went wrong',
@@ -30,3 +29,12 @@ exports.getAllCategories = async (req, res) => {
     });
   }
 };
+
+exports.deleteCategory = async (req, res) => {
+  try {
+    const category = await Category.findByIdAndDelete(req.params.id);
+    res.status(201).redirect('/user/dashboard');
+  } catch(error) {
+    res.status(400).redirect('/user/dashboard');
+  }
+}

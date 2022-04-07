@@ -53,14 +53,19 @@ exports.getDashboardPage = async (req, res) => {
 
     const user = await User.findOne({_id: req.session.userID}).populate('workouts');
     const categories = await Category.find();
-
     const workouts = await Workout.find({user:req.session.userID});
+
+    // for admin
+    const users = await User.find();
+    const allWorkouts = await Workout.find();
 
     res.status(200).render('dashboard', {
       page_name: 'dashboard',
       user,
       categories,
-      workouts
+      workouts,
+      users,
+      allWorkouts
     })
 
   } catch(error) {
@@ -78,6 +83,19 @@ exports.uploadProfileImage = async (req, res) => {
   } catch(error) {
     res.status(400).json({
       status: 'not uploaded',
+      error
+    })
+  }
+}
+
+exports.deleteUser = async (req, res) => {
+  try {
+
+    const user = await User.findByIdAndDelete(req.params.id);
+    res.status(200).redirect('/user/dashboard');
+  } catch(error) {
+    res.status(400).json({
+      status: 'User not deleted',
       error
     })
   }
