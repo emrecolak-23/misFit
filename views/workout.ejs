@@ -23,6 +23,25 @@
                   </div>
                </div>
             </div>
+            <div class="row mb-3">
+                  <div class="col-md-4">
+                     <form class="form-inline" method="get" id="site-searchform" action="/workout">
+                        <input class="form-control mr-sm-2" name="search" type="text" placeholder="Search..." aria-label="Search">
+                        <button class="btn btn-outline-primary my-2 my-sm-0" value="search" type="submit">Search</button>
+                     </form>
+                  </div> 
+                  <div class="col-md-8">
+                     <div class="btn-group">
+                        <% for (let i = 0; i<categories.length;i++) { %> 
+                           <% if(category && categories[i].name == category.name) { %>
+                              <a href="/workout?category=<%= categories[i].slug %>" class="btn btn-outline-primary text-white active"><%= categories[i].name %></a>
+                           <% } else { %>
+                              <a href="/workout?category=<%= categories[i].slug %>" class="btn btn-outline-primary text-white"><%= categories[i].name %></a>
+                           <% } %>   
+                        <% } %> 
+                     </div>
+                  </div>
+            </div>
             <div class="row">
                <% for (let i = 0; i<workouts.length;i++) { %> 
                <div class="col-md-4">
@@ -36,6 +55,31 @@
                </a>
                </div>
                <% } %> 
+            </div>
+            <div class="row mt-3">
+               <div class="offset-4 col-md-4">
+                  <nav aria-label="Page navigation example">
+                     <% if (pages>0) { %> 
+                     <ul class="pagination pg-blue">
+                       <% for (let i = 1; i<=pages; i++) { %>
+                           <% if(i==current) { %>
+                              <li class="page-item active">
+                                 <a href="/workout?page=<%= i %>" class="page-link"><%= i %><span class="sr-only">(current)</span></a>
+                               </li>
+                           <% } else if (i<pages) { %> 
+                              <li class="page-item">
+                                 <a href="/workout?page=<%= i %>" class="page-link"><%= i %></a>
+                              </li>
+                              <% } else { %>
+                                 <li class="page-item ">
+                                    <a href="/workout?page=<%= i %>" class="page-link">>></a>
+                                  </li>
+                              <% } %> 
+                       <% } %> 
+                     </ul>
+                     <% } %> 
+                  </nav>
+               </div>
             </div>
          </div>
       </div>

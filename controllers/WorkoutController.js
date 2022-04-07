@@ -3,6 +3,7 @@ const fs = require('fs');
 // Import Model
 const User = require('../models/User');
 const Workout = require('../models/Workout');
+const Category = require('../models/Category');
 
 exports.createWorkout = async (req, res) => {
   try {
@@ -21,11 +22,49 @@ exports.createWorkout = async (req, res) => {
 
 exports.getAllWorkout = async (req, res) => {
   try {
-    const workouts = await Workout.find().sort('-createdAt');
-    console.log(workouts);
+    // Pagination
+    const page = req.query.page || 1;
+    const workoutPerPage = 6;
+    const totalWorkOut = await Workout.find().countDocuments();
+
+    // Search 
+    const categorySlug = req.query.category;
+    
+    const category = await Category.findOne({slug:categorySlug});
+
+    let filter = {};
+    const query = req.query.search;
+
+    if (categorySlug) {
+      filter = {category: category._id}
+    }
+    if (query) {
+      filter = {name:query}
+    }
+    if(!query && !categorySlug) {
+      filter.name = "";
+      filter.category = null
+    }
+    // Get workouts
+    const workouts = await Workout.find({
+      $or: [
+        {name: {$regex: ".*"+filter.name+".*", $options:"i"}},
+        {category: filter.category}
+      ]
+    }).sort('-createdAt')
+      .skip((page-1)*workoutPerPage)
+      .limit(workoutPerPage)
+
+    // Get Categories
+    const categories = await Category.find();
+
     res.status(200).render('workout', {
       page_name: 'workout',
       workouts,
+      current: page,
+      pages: Math.ceil(totalWorkOut/workoutPerPage),
+      categories,
+      category
     });
   } catch (error) {
     res.status(400).json({
