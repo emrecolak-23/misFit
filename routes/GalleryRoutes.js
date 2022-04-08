@@ -22,4 +22,6 @@ let upload = multer({
 
 router.route('/').post(upload,GalleryController.uploadImageToGallery)
 
+router.route('/:id').delete(GalleryController.deleteImageToGallery);
+
 module.exports = router

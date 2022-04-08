@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/User');
 const Category = require('../models/Category');
 const Workout = require('../models/Workout');
+const Gallery = require('../models/Gallery');
  
 exports.registerUser = async (req, res) => {
   try {
@@ -58,10 +59,11 @@ exports.getDashboardPage = async (req, res) => {
     const user = await User.findOne({_id: req.session.userID}).populate('workouts');
     const categories = await Category.find();
     const workouts = await Workout.find({user:req.session.userID});
-
+  
     // for admin
     const users = await User.find();
     const allWorkouts = await Workout.find();
+    const images = await Gallery.find();
 
     res.status(200).render('dashboard', {
       page_name: 'dashboard',
@@ -69,7 +71,8 @@ exports.getDashboardPage = async (req, res) => {
       categories,
       workouts,
       users,
-      allWorkouts
+      allWorkouts,
+      images
     })
 
   } catch(error) {

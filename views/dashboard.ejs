@@ -421,6 +421,25 @@
                   <% } %> 
                 </tbody>
               </table>
+              <h1 class="text-white">Images</h1> 
+              <table class="table">
+                <thead>
+                  <tr class="text-white">
+                    <th scope="col">#ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (let i=0; i<images.length;i++) { %> 
+                  <tr class="text-white">
+                    <th scope="row"><%= images[i]._id %></th>
+                    <td><%= images[i].image %></td>
+                    <td><a onclick="return confirm('Are you sure?')" href="/images/<%= images[i]._id %>?_method=DELETE" class="btn btn-outline-danger btn-sm text-uppercase">Delete</a></td>
+                  </tr>
+                  <% } %> 
+                </tbody>
+              </table>
 
             </div>
             <!-- Add Workout Modal -->
