@@ -2,6 +2,10 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
+// Import Logger
+const logger = require('../logger/User');
+const { info } = require('../logger/User');
+
 // Create Schema
 const Schema = mongoose.Schema;
 
@@ -47,6 +51,13 @@ UserSchema.pre('save', function(next) {
           next();
       });
   });
+});
+
+UserSchema.post('save', (doc) => {
+  logger.log({
+    level: 'info',
+    message: doc
+  })
 });
 
 // Create User Model

@@ -7,12 +7,19 @@ const Workout = require('../models/Workout');
 const Gallery = require('../models/Gallery');
 const Contact = require('../models/Contact');
  
+// Import Logger
+const logger = require('../logger/User');
+
 exports.registerUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
     req.flash('success', `${user.name} welcome to misfit. Your registiration process successfully completed`)
     res.status(200).redirect('/login');
   } catch (error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     req.flash('error', 'Please fill all fields correctly.')
     res.status(400).redirect('/register');
   }
@@ -39,6 +46,10 @@ exports.loginUser = async (req, res) => {
       res.status(400).redirect('/login');
     }
   } catch (error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     req.flash('error', 'User not found. Please register!')
     res.status(400).redirect('/login');
   }
@@ -50,6 +61,10 @@ exports.logout = (req, res) => {
       res.redirect('/')
     })
   } catch(error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     res.status(400).redirect('/')
   }
 }
@@ -91,6 +106,10 @@ exports.uploadProfileImage = async (req, res) => {
     await user.save();
     res.status(201).redirect('/user/dashboard');
   } catch(error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     res.status(400).json({
       status: 'not uploaded',
       error
@@ -104,6 +123,10 @@ exports.deleteUser = async (req, res) => {
     const user = await User.findByIdAndDelete(req.params.id);
     res.status(200).redirect('/user/dashboard');
   } catch(error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     res.status(400).json({
       status: 'User not deleted',
       error

@@ -1,6 +1,9 @@
 // Import Models
 const Category = require('../models/Category');
 
+// Import Logger
+const logger = require('../logger/Category');
+
 exports.createCategory = async (req, res) => {
   try {
     const category = await Category.create({
@@ -9,6 +12,10 @@ exports.createCategory = async (req, res) => {
     req.flash('success', `${category.name} has been successfully created`);
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     req.flash('error', 'Something went wrong');
     res.status(400).redirect('/user/dashboard');
   }
@@ -35,6 +42,10 @@ exports.deleteCategory = async (req, res) => {
     req.flash('success', `${category.name} has been successfully deleted`);
     res.status(201).redirect('/user/dashboard');
   } catch(error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     req.flash('error', 'Something went wrong');
     res.status(400).redirect('/user/dashboard');
   }
