@@ -7,21 +7,22 @@
                     <h3>Link Menu</h3>
                     <ul class="link_menu">
                        <li><a href="#">Home</a></li>
-                       <li><a href="about.html"> About</a></li>
-                       <li><a href="service.html">Services</a></li>
-                       <li><a href="news.html">News</a></li>
-                       <li><a href="trainer.html">Trainer</a></li>     
-                       <li><a href="gallery.html">Gallery</a></li>
-                       <li><a href="contact.html">Contact Us</a></li>
+                       <li><a href="/about"> About</a></li>
+                       <li><a href="/workout">Workouts</a></li>
+                       <li><a href="/trainer">Trainer</a></li>     
+                       <li><a href="/gallery">Gallery</a></li>
+                       <li><a href="/contact">Contact</a></li>
+                       <li><a href="/user/dashboard">Dashboard</a></li>
+
                     </ul>
                  </div>
                  <div class=" col-md-5">
                     <h3>Contact US</h3>
                     <ul class="conta">
-                       <li><i class="fa fa-map-marker" aria-hidden="true"></i>Address : Lorem Ipsum is <br>simply dummy 
+                       <li><i class="fa fa-map-marker" aria-hidden="true"></i>Address : <%= contact[0].address.substring(0,15) %>  <br><%= contact[0].address.substring(15)  %>  
                        </li>
-                       <li><i class="fa fa-mobile" aria-hidden="true"></i> Phone :  +(1234) 567 890</li>
-                       <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#">Email : demo@gmail.com</a></li>
+                       <li><i class="fa fa-mobile" aria-hidden="true"></i> Phone :  <%= contact[0].phone %></li>
+                       <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="#">Email : <%= contact[0].email  %> </a></li>
                     </ul>
                  </div>
                  <div class="col-md-4">

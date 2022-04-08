@@ -4,6 +4,7 @@ const fs = require('fs');
 const User = require('../models/User');
 const Workout = require('../models/Workout');
 const Category = require('../models/Category');
+const Contact = require('../models/Contact');
 
 exports.createWorkout = async (req, res) => {
   try {
@@ -24,6 +25,8 @@ exports.createWorkout = async (req, res) => {
 
 exports.getAllWorkout = async (req, res) => {
   try {
+    const contact = await Contact.find().limit(1);
+
     // Pagination
     const page = req.query.page || 1;
     const workoutPerPage = 6;
@@ -68,6 +71,7 @@ exports.getAllWorkout = async (req, res) => {
       pages: Math.ceil(totalWorkOut / workoutPerPage),
       categories,
       category,
+      contact
     });
   } catch (error) {
     res.status(400).json({
@@ -83,10 +87,13 @@ exports.getWorkout = async (req, res) => {
       .populate('category')
       .populate('user');
     const user = await User.findById(req.session.userID);
+    const contact = await Contact.find().limit(1);
+
     res.status(200).render('workout-single', {
       page_name: 'workout',
       workout,
       user,
+      contact
     });
   } catch (error) {
     res.status(400).json({

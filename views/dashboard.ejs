@@ -406,7 +406,7 @@
                   <tr class="text-white">
                     <th scope="col">ID#</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Addd</th>
+                    <th scope="col">Add</th>
                     <th scope="col">Delete</th>
                   </tr>
                 </thead>
@@ -438,6 +438,26 @@
                     <td><a onclick="return confirm('Are you sure?')" href="/images/<%= images[i]._id %>?_method=DELETE" class="btn btn-outline-danger btn-sm text-uppercase">Delete</a></td>
                   </tr>
                   <% } %> 
+                </tbody>
+              </table>
+              <h1 class="text-white">Contact Info</h1> 
+              <table class="table">
+                <thead>
+                  <tr class="text-white">
+                    <th scope="col">Address</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Update</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="text-white">
+                    <th scope="row"><%= contact[0].address %></th>
+                    <td><%= contact[0].phone %></td>
+                    <td><%= contact[0].email %></td>
+                    <td><a data-toggle="modal" data-target="#addContactInfo" class="btn btn-outline-warning btn-sm text-uppercase">Update</a></td>
+                  </tr>
+                  
                 </tbody>
               </table>
 
@@ -598,6 +618,71 @@
                               class="btn btn-primary rounded-0 d-block ml-auto mr-0 tm-btn-animate tm-btn-submit tm-icon-submit"
                             >
                               <span>Add</span>
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Update Contact Info -->
+            <!-- Add New Category -->
+            <div
+              class="modal fade"
+              id="addContactInfo"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="myModalLabel"
+            >
+              <div
+                class="modal-dialog modal-dialog-centered modal-lg"
+                role="document"
+              >
+                <div class="modal-content">
+                  <div class="modal-body customer-box">
+                    <!-- Tab Panes -->
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="Login">
+                        <form
+                          method="post"
+                          action="/contacts/<%= contact[0]._id %>?_method=PUT"
+                          class="tm-contact-form"
+                        >
+                          <div class="form-group mb-3">
+                            <input
+                              type="text"
+                              name="address"
+                              class="form-control rounded-0"
+                              value="<%= contact[0].address %>"
+                              required
+                            />
+                          </div>
+                          <div class="form-group mb-3">
+                            <input
+                              type="text"
+                              name="phone"
+                              class="form-control rounded-0"
+                              value="<%= contact[0].phone %>"
+                              required
+                            />
+                          </div>
+                          <div class="form-group mb-3">
+                            <input
+                              type="text"
+                              name="email"
+                              class="form-control rounded-0"
+                              value="<%= contact[0].email  %>"
+                              required
+                            />
+                          </div>
+                          <div class="form-group mb-0">
+                            <button
+                              type="submit"
+                              class="btn btn-primary rounded-0 d-block ml-auto mr-0 tm-btn-animate tm-btn-submit tm-icon-submit"
+                            >
+                              <span>Update</span>
                             </button>
                           </div>
                         </form>

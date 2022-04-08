@@ -4,18 +4,21 @@ const nodemailer = require('nodemailer');
 const User = require('../models/User');
 const Workout = require('../models/Workout');
 const Gallery = require('../models/Gallery');
+const Contact = require('../models/Contact');
+
 
 exports.getHomePage = async (req, res) => {
   try {
     const trainers = await User.find({ role: 'trainer' });
     const workouts = await Workout.find().sort('-createdAt').limit(3);
     const images = await Gallery.find().limit(3);
-
+    const contact = await Contact.find().limit(1);
     res.status(200).render('index', {
       page_name: 'index',
       trainers,
       workouts,
-      images
+      images,
+      contact
     });
   } catch (error) {
     res.status(400).json({
@@ -25,10 +28,13 @@ exports.getHomePage = async (req, res) => {
   }
 };
 
-exports.getAboutPage = (req, res) => {
+exports.getAboutPage = async (req, res) => {
   try {
+    const contact = await Contact.find().limit(1);
+
     res.status(200).render('about', {
       page_name: 'about',
+      contact
     });
   } catch (error) {
     res.status(400).json({
@@ -41,9 +47,12 @@ exports.getAboutPage = (req, res) => {
 exports.getTrainerPage = async (req, res) => {
   try {
     const trainers = await User.find({ role: 'trainer' });
+    const contact = await Contact.find().limit(1);
+
     res.status(200).render('trainer', {
       page_name: 'trainer',
       trainers,
+      contact
     });
   } catch (error) {
     res.status(400).json({
@@ -58,11 +67,14 @@ exports.getSingleTrainer = async (req, res) => {
     const trainer = await User.findById(req.params.id);
     const workouts = await Workout.find({ user: req.params.id });
     const user = await User.findById(req.session.userID);
+    const contact = await Contact.find().limit(1);
+
     res.status(200).render('trainer-single', {
       page_name: 'trainer',
       trainer,
       user,
       workouts,
+      contact
     });
   } catch (error) {}
 };
@@ -70,9 +82,12 @@ exports.getSingleTrainer = async (req, res) => {
 exports.getGalleryPage = async (req, res) => {
   try {
     const images = await Gallery.find();
+    const contact = await Contact.find().limit(1);
+
     res.status(200).render('gallery', {
       page_name: 'gallery',
-      images
+      images,
+      contact
     });
   } catch (error) {
     res.status(400).json({
@@ -82,10 +97,13 @@ exports.getGalleryPage = async (req, res) => {
   }
 };
 
-exports.getContactPage = (req, res) => {
+exports.getContactPage = async (req, res) => {
   try {
+    const contact = await Contact.find().limit(1);
+
     res.status(200).render('contact', {
       page_name: 'contact',
+      contact
     });
   } catch (error) {
     res.status(400).json({
@@ -95,10 +113,12 @@ exports.getContactPage = (req, res) => {
   }
 };
 
-exports.getLoginPage = (req, res) => {
+exports.getLoginPage = async (req, res) => {
   try {
+    const contact = await Contact.find().limit(1);
     res.status(200).render('login', {
       page_name: 'Login',
+      contact
     });
   } catch (error) {
     res.status(400).json({
@@ -108,10 +128,13 @@ exports.getLoginPage = (req, res) => {
   }
 };
 
-exports.getRegisterPage = (req, res) => {
+exports.getRegisterPage = async (req, res) => {
   try {
+    const contact = await Contact.find().limit(1);
+
     res.status(200).render('register', {
       page_name: 'register',
+      contact
     });
   } catch (error) {
     res.status(400).json({

@@ -5,6 +5,7 @@ const User = require('../models/User');
 const Category = require('../models/Category');
 const Workout = require('../models/Workout');
 const Gallery = require('../models/Gallery');
+const Contact = require('../models/Contact');
  
 exports.registerUser = async (req, res) => {
   try {
@@ -59,7 +60,8 @@ exports.getDashboardPage = async (req, res) => {
     const user = await User.findOne({_id: req.session.userID}).populate('workouts');
     const categories = await Category.find();
     const workouts = await Workout.find({user:req.session.userID});
-  
+    const contact = await Contact.find().limit(1);
+
     // for admin
     const users = await User.find();
     const allWorkouts = await Workout.find();
@@ -72,7 +74,8 @@ exports.getDashboardPage = async (req, res) => {
       workouts,
       users,
       allWorkouts,
-      images
+      images,
+      contact
     })
 
   } catch(error) {
