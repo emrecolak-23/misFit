@@ -74,27 +74,27 @@
             <div class="row">
                <div class="col-md-12">
                   <div class="titlepage">
-                     <h2>Our Services</h2>
-                     <p>The point of using Lorem Ipsum is that it has a more-or-less </p>
+                     <h2>Our Workouts</h2>
+                     <p>The most comprehensive database of free workout routines anywhere!</p>
+                     <a href="/workout" type="button" class="btn btn-outline-primary float-sm-left mb-2 mt-2">See All</a>
                   </div>
                </div>
             </div>
             <div class="row">
-               <div class="col-md-4">
-                  <div class="se_img">
-                     <figure><img src="images/service1.jpg" alt="#"/></figure>
+               <% if (workouts) { %> 
+               <% for (let i = 0; i<workouts.length;i++) { %> 
+                  <div class="col-md-4">
+                  <a href="/workout/<%= workouts[i].slug %>">   
+                     <div class="se_img">
+                        <figure><img src="<%= workouts[i].image  %>" alt="#"/></figure>
+                     </div>
+                     <div class="text-center">
+                       <h3 class="text-white"><%= workouts[i].name %></h3>
+                     </div>
+                  </a>
                   </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="se_img">
-                     <figure><img src="images/service2.jpg" alt="#"/></figure>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div class="se_img">
-                     <figure><img src="images/service3.jpg" alt="#"/></figure>
-                  </div>
-               </div>
+               <% } %> 
+               <% } %> 
             </div>
          </div>
       </div>
@@ -106,44 +106,29 @@
                <div class="col-md-12">
                   <div class="titlepage">
                      <h2>Our Trainers</h2>
-                     <p>Lorem Ipsum available, but the majority have suffered </p>
+                     <p>Find right your personal trainer</p>
+                     <a href="/trainer" type="button" class="btn btn-outline-dark float-sm-left mb-2 mt-2">See All</a>
                   </div>
                </div>
             </div>
             <div class="row">
-               <div class="col-md-4">
-                  <div id="trai" class="trainer_box">
-                     <div class="trainer_img">
-                        <figure><img src="images/tra.jpg" alt="#"/></figure>
-                     </div>
-                     <div class="trainer">
-                        <h3>sandy Mark </h3>
-                        <p>architecture</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div id="trai" class="trainer_box">
-                     <div class="trainer_img">
-                        <figure><img src="images/tra0.jpg" alt="#"/></figure>
-                     </div>
-                     <div class="trainer">
-                        <h3>limijack </h3>
-                        <p>Maping</p>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-md-4">
-                  <div id="trai" class="trainer_box">
-                     <div class="trainer_img">
-                        <figure><img src="images/tra1.jpg" alt="#"/></figure>
-                     </div>
-                     <div class="trainer">
-                        <h3>smith den </h3>
-                        <p>Metarial</p>
-                     </div>
-                  </div>
-               </div>
+               <% if (trainers) { %> 
+               <% for (let i = 0; i<trainers.length;i++) { %> 
+                  <div class="col-md-4">
+                     <a href="/trainer/<%= trainers[i]._id %>"> 
+                        <div id="trai" class="trainer_box">
+                           <div class="trainer_img">
+                              <figure><img src="<%= trainers[i].image %> " alt="#"/></figure>
+                           </div>
+                           <div class="trainer">
+                              <h3><%= trainers[i].name  %></h3>
+                              <p><%= trainers[i].email %> </p>
+                           </div>
+                        </div>
+                     </a>
+                  </div>   
+                  <% } %>  
+               <% } %> 
             </div>
          </div>
       </div>
@@ -155,7 +140,8 @@
                <div class="col-md-12">
                   <div class="titlepage">
                      <h2>Gallery</h2>
-                     <p>The point of using Lorem Ipsum is that it has a more-or-less</p>
+                     <p>If you want to have beautiful body, join us</p>
+                     <a href="/gallery" type="button" class="btn btn-outline-primary float-sm-left mb-2 mt-2">See All</a>
                   </div>
                </div>
             </div>
@@ -163,36 +149,13 @@
                <div class="tz-gallery">
                   <div class="col-sm-12">
                      <div class="row">
-                        <div class="col-sm-6 col-md-4">
-                           <a class="gallery_img" href="images/gallery1.jpg">
-                           <img src="images/gallery1.jpg" alt="Bridge">
-                           </a>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                           <a class="gallery_img" href="images/gallery2.jpg">
-                           <img src="images/gallery2.jpg" alt="Bridge">
-                           </a>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                           <a class="gallery_img" href="images/gallery3.jpg">
-                           <img src="images/gallery3.jpg" alt="Bridge">
-                           </a>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                           <a class="gallery_img" href="images/gallery4.jpg">
-                           <img src="images/gallery4.jpg" alt="Bridge">
-                           </a>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                           <a class="gallery_img" href="images/gallery5.jpg">
-                           <img src="images/gallery5.jpg" alt="Bridge">
-                           </a>
-                        </div>
-                        <div class="col-sm-6 col-md-4">
-                           <a class="gallery_img" href="images/gallery6.jpg">
-                           <img src="images/gallery6.jpg" alt="Bridge">
-                           </a>
-                        </div>
+                        <% for (let i=0; i<images.length; i++) { %>  
+                           <div class="col-sm-6 col-md-4">
+                             <a class="gallery_img" href="/gallery/<%= images[i].image %>">
+                               <img src="/gallery/<%= images[i].image %>" alt="Bridge" />
+                             </a>
+                           </div>
+                           <% } %>                         
                      </div>
                   </div>
                </div>
@@ -212,22 +175,22 @@
             </div>
             <div class="row">
                <div class="col-md-6">
-                  <form id="request" class="main_form">
+                  <form method="post" action="/contact" class="main_form">
                      <div class="row">
                         <div class="col-md-12 ">
-                           <input class="contactus" placeholder="Your Name" type="type" name="Your Name"> 
+                           <input class="contactus" placeholder="Your Name" type="type" name="name"> 
                         </div>
                         <div class="col-md-12">
-                           <input class="contactus" placeholder="Email" type="type" name="Email"> 
+                           <input class="contactus" placeholder="Email" type="type" name="email"> 
                         </div>
                         <div class="col-md-12">
-                           <input class="contactus" placeholder="Phone Number" type="type" name="Phone Number">                          
+                           <input class="contactus" placeholder="Phone Number" type="type" name="phone">                          
                         </div>
                         <div class="col-md-12">
-                           <input class="contactus" placeholder="Subject" type="type" name="Subject">                          
+                           <input class="contactus" placeholder="Subject" type="type" name="subject">                          
                         </div>
                         <div class="col-md-12">
-                           <textarea class="textarea" placeholder="Message" type="type" Message="Name">Message</textarea>
+                           <textarea class="textarea" placeholder="Message" type="type" name="message">Message</textarea>
                         </div>
                         <div class="col-md-12">
                            <button class="send_btn">Send</button>
@@ -237,10 +200,21 @@
                </div>
                <div class="col-md-6">
                   <div class="map_main">
-                     <div class="map-responsive">
-                        <iframe src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA0s1a7phLN0iaD6-UE7m4qP-z21pH0eSc&amp;q=Eiffel+Tower+Paris+France" width="600" height="425" frameborder="0" style="border:0; width: 100%;" allowfullscreen=""></iframe>
-                     </div>
-                  </div>
+                     <div class="map-responsive" 
+                     style="overflow:hidden;
+                             width: 600px;
+                             height: 425px;
+                             position: relative;">
+                    <iframe width="700" 
+                            height="440" 
+                            src="https://maps.google.com/maps?width=700&amp;height=440&amp;hl=en&amp;q=%C3%87ukur%C3%A7ay%C4%B1r%2C%20Hastane%20Sk.%20No%3A33%2C%2061040%20Trabzon%20Merkez%2FTrabzon+(MisFit)&amp;ie=UTF8&amp;t=&amp;z=10&amp;iwloc=B&amp;output=embed" 
+                            frameborder="0" 
+                            scrolling="no" 
+                            marginheight="0" 
+                            marginwidth="0">
+                   </iframe>
+                   <div style="position: absolute;width: 80%;bottom: 10px;left: 0;right: 0;margin-left: auto;margin-right: auto;color: #000;text-align: center;"><small style="line-height: 1.8;font-size: 2px;background: #fff;">Powered by <a href="https://embedgooglemaps.com/">Embed Google Maps</a> & <a href="https://www.pteducation.se/pt-utbildning">personlig tränare utbildning stockholm</a></small></div><style>#gmap_canvas img{max-width:none!important;background:none!important}</style></div><br />
+                 </div>
                </div>
             </div>
          </div>

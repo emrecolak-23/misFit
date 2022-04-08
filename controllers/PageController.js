@@ -5,10 +5,17 @@ const User = require('../models/User');
 const Workout = require('../models/Workout');
 const Gallery = require('../models/Gallery');
 
-exports.getHomePage = (req, res) => {
+exports.getHomePage = async (req, res) => {
   try {
+    const trainers = await User.find({ role: 'trainer' });
+    const workouts = await Workout.find().sort('-createdAt').limit(3);
+    const images = await Gallery.find().limit(3);
+
     res.status(200).render('index', {
       page_name: 'index',
+      trainers,
+      workouts,
+      images
     });
   } catch (error) {
     res.status(400).json({
