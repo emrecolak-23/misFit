@@ -6,6 +6,9 @@ const Workout = require('../models/Workout');
 const Category = require('../models/Category');
 const Contact = require('../models/Contact');
 
+// Import Model
+const logger = require('../logger/Workout');
+
 exports.createWorkout = async (req, res) => {
   try {
     const workout = await Workout.create({
@@ -19,6 +22,10 @@ exports.createWorkout = async (req, res) => {
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
     req.flash('error', 'Something went wrong!')
+    logger.log({
+      level: 'error',
+      message: error
+    })
     res.status(400).redirect('/user/dashboard');
   }
 };
@@ -111,6 +118,10 @@ exports.enrollWorkout = async (req, res) => {
     req.flash('success', `You has been successfully enrolled this workout`);
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     res.status(400).redirect('/user/dashboard');
   }
 };
@@ -123,6 +134,10 @@ exports.releaseWorkout = async (req, res) => {
     req.flash('success', `You has been successfully released this workout`);
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     res.status(400).redirect('/user/dashboard');
   }
 };
@@ -136,6 +151,10 @@ exports.deleteWorkout = async (req, res) => {
     req.flash('success',`${workout.name} deleted successfully.`)
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     req.flash('error', 'Something went wront when delete workout');
     res.status(400).redirect('/user/dashboard');
   }
@@ -156,6 +175,10 @@ exports.updateWorkout = async (req, res) => {
     req.flash('success',`${workout.name} has been successfully updated`);
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
+    logger.log({
+      level: 'error',
+      message: error
+    })
     req.flash('error', 'Something went wrong!')
     res.status(400).redirect('/user/dashboard');
   }
