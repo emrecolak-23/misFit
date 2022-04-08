@@ -2,6 +2,9 @@
 const mongoose = require('mongoose');
 const slugify = require('slugify');
 
+// Import Logger
+const logger = require('../logger/Workout');
+
 // Create Schema Object
 const Schema = mongoose.Schema;
 
@@ -45,6 +48,14 @@ WorkoutSchema.pre('validate', function(next){
   next();
 });
 
+WorkoutSchema.post('save', (doc)=> {
+
+  logger.log({
+    level: 'info',
+    message: doc
+  })
+  
+});
 // Create Workout Model
 const Workout = mongoose.model('Workout', WorkoutSchema);
 
