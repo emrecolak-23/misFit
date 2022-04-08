@@ -7,12 +7,11 @@ exports.uploadImageToGallery = async (req, res) => {
     const image = await Gallery.create({
       image: req.file.filename
     })
+    req.flash('success', `${image.image} has been successfully created`);
     res.status(201).redirect('/gallery')
   } catch(error) {
-    res.status(400).json({
-      status: 'Image not uploaded',
-      error
-    })
+    req.flash('error', 'Something went wrong');
+    res.status(400).redirect('/gallery');
   }
 }
 

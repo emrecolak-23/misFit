@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const methodOverride = require('method-override');
+const flash = require('connect-flash');
 // Import Routers
 const PageRouter = require('./routes/PageRoutes');
 const WorkoutRouter = require('./routes/WorkoutRoutes');
@@ -55,7 +56,11 @@ app.use('*', (req, res, next) => {
   userIN = req.session.userID;
   next();
 });
-
+app.use(flash());
+app.use((req, res, next) => {
+  res.locals.flashMessages = req.flash();
+  next();
+})
 
 // Routes
 app.use('/', PageRouter);

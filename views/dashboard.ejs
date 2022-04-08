@@ -69,8 +69,24 @@
       </div>
   </div>
 
-<div class="services">
+<div class="services"> 
   <div class="container">
+    <div class="row">
+      <div class="offset-3 col-md-6">
+        <% if (flashMessages) { %>
+          <% if (flashMessages.success) { %>
+            <div class="alert alert-success text-center" role="alert">
+              <%= flashMessages.success %> 
+            </div>
+          <% } %>
+          <% if (flashMessages.error) { %>
+            <div class="alert alert-danger text-center" role="alert">
+              <%= flashMessages.error %> 
+            </div>
+          <% } %> 
+      <% } %>
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <div class="titlepage">
@@ -260,6 +276,22 @@
   </div>
   <div  class="services">
     <div class="container">
+      <div class="row">
+        <div class="offset-3 col-md-6">
+          <% if (flashMessages) { %>
+            <% if (flashMessages.success) { %>
+              <div class="alert alert-success text-center" role="alert">
+                <%= flashMessages.success %> 
+              </div>
+            <% } %>
+            <% if (flashMessages.error) { %>
+              <div class="alert alert-danger text-center" role="alert">
+                <%= flashMessages.error %> 
+              </div>
+              <% } %> 
+        <% } %>
+        </div>
+      </div>
        <div class="row">
           <div class="col-md-12">
              <div class="titlepage">
@@ -309,6 +341,22 @@
   </div>
   <div class="services">
     <div class="container">
+      <div class="row">
+        <div class="offset-3 col-md-6">
+          <% if (flashMessages) { %>
+            <% if (flashMessages.success) { %>
+              <div class="alert alert-success text-center" role="alert">
+                <%= flashMessages.success %> 
+              </div>
+            <% } %>
+            <% if (flashMessages.error) { %>
+              <div class="alert alert-danger text-center" role="alert">
+                <%= flashMessages.error %> 
+              </div>
+              <% } %> 
+        <% } %>
+        </div>
+      </div>
       <div class="row">
         <div class="col-md-12">
           <div class="titlepage">

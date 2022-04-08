@@ -5,8 +5,18 @@
 <div class="container">
   <div class="section-title text-center">
       <h1 class="mt-5">LOGIN</h1>
-
-  <div class="row">
+      <% if (flashMessages) { %>
+        <% if(flashMessages.error) { %>
+            <div class="alert alert-danger" role="alert">
+                <%= flashMessages.error %> 
+              </div>
+        <% } else if (flashMessages.success) { %>
+            <div class="alert alert-success" role="alert">
+                <%= flashMessages.success %> 
+              </div>
+            <% } %> 
+      <% } %>
+  <div class="row"> 
       <div class="col-xl-12 col-md-12 col-sm-12">
           <div class="contact_form">
               <div id="message">

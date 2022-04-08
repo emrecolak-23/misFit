@@ -14,9 +14,25 @@
 <div class="gallery">
   <div class="container">
     <div class="row">
+      <div class="offset-3 col-md-6">
+        <% if (flashMessages) { %>
+          <% if (flashMessages.success) { %>
+            <div class="alert alert-success text-center" role="alert">
+              <%= flashMessages.success %> 
+            </div>
+          <% } %>
+          <% if (flashMessages.error) { %>
+            <div class="alert alert-danger text-center" role="alert">
+              <%= flashMessages.error %> 
+            </div>
+            <% } %> 
+      <% } %>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-md-12">
         <div class="titlepage">
-          <p>The point of using Lorem Ipsum is that it has a more-or-less</p>
+          <p>Share your experience in our gallery</p>
         </div>
       </div>
     </div>

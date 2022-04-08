@@ -14,6 +14,18 @@
 <!--  contact -->
 <div id="contact" class="contact">
   <div class="container">
+    <% if(flashMessages) { %>
+        
+      <% if(flashMessages.success) { %> 
+        <div class="alert alert-success text-center" role="alert">
+          <%= flashMessages.success %> 
+        </div>
+      <% } else if (flashMessages.error) { %>
+        <div class="alert alert-danger text-center" role="alert">
+          <%= flashMessages.error  %> 
+        </div>
+        <% } %> 
+    <% } %> 
     <div class="row">
       <div class="col-md-6">
         <form method="post" action="/contact" class="main_form">

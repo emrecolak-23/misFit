@@ -14,8 +14,10 @@ exports.createWorkout = async (req, res) => {
       category: req.body.category,
       user: req.session.userID,
     });
+    req.flash('success', `${workout.name} has been successfully created.`);
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
+    req.flash('error', 'Something went wrong!')
     res.status(400).redirect('/user/dashboard');
   }
 };
@@ -27,33 +29,34 @@ exports.getAllWorkout = async (req, res) => {
     const workoutPerPage = 6;
     const totalWorkOut = await Workout.find().countDocuments();
 
-    // Search 
+    // Search
     const categorySlug = req.query.category;
-    
-    const category = await Category.findOne({slug:categorySlug});
+
+    const category = await Category.findOne({ slug: categorySlug });
 
     let filter = {};
     const query = req.query.search;
 
     if (categorySlug) {
-      filter = {category: category._id}
+      filter = { category: category._id };
     }
     if (query) {
-      filter = {name:query}
+      filter = { name: query };
     }
-    if(!query && !categorySlug) {
-      filter.name = "";
-      filter.category = null
+    if (!query && !categorySlug) {
+      filter.name = '';
+      filter.category = null;
     }
     // Get workouts
     const workouts = await Workout.find({
       $or: [
-        {name: {$regex: ".*"+filter.name+".*", $options:"i"}},
-        {category: filter.category}
-      ]
-    }).sort('-createdAt')
-      .skip((page-1)*workoutPerPage)
-      .limit(workoutPerPage)
+        { name: { $regex: '.*' + filter.name + '.*', $options: 'i' } },
+        { category: filter.category },
+      ],
+    })
+      .sort('-createdAt')
+      .skip((page - 1) * workoutPerPage)
+      .limit(workoutPerPage);
 
     // Get Categories
     const categories = await Category.find();
@@ -62,9 +65,9 @@ exports.getAllWorkout = async (req, res) => {
       page_name: 'workout',
       workouts,
       current: page,
-      pages: Math.ceil(totalWorkOut/workoutPerPage),
+      pages: Math.ceil(totalWorkOut / workoutPerPage),
       categories,
-      category
+      category,
     });
   } catch (error) {
     res.status(400).json({
@@ -98,6 +101,7 @@ exports.enrollWorkout = async (req, res) => {
     const user = await User.findById(req.session.userID);
     await user.workouts.push({ _id: req.body.workout_id });
     await user.save();
+    req.flash('success', `You has been successfully enrolled this workout`);
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
     res.status(400).redirect('/user/dashboard');
@@ -109,6 +113,7 @@ exports.releaseWorkout = async (req, res) => {
     const user = await User.findById(req.session.userID);
     await user.workouts.pull({ _id: req.body.workout_id });
     await user.save();
+    req.flash('success', `You has been successfully released this workout`);
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
     res.status(400).redirect('/user/dashboard');
@@ -120,8 +125,11 @@ exports.deleteWorkout = async (req, res) => {
     const workout = await Workout.findOneAndRemove({ slug: req.params.slug });
     let deletedImage = __dirname + '/../uploads/' + workout.image;
     fs.unlinkSync(deletedImage);
+
+    req.flash('success',`${workout.name} deleted successfully.`)
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
+    req.flash('error', 'Something went wront when delete workout');
     res.status(400).redirect('/user/dashboard');
   }
 };
@@ -137,8 +145,11 @@ exports.updateWorkout = async (req, res) => {
       }
     );
     await workout.save();
+    
+    req.flash('success',`${workout.name} has been successfully updated`);
     res.status(201).redirect('/user/dashboard');
   } catch (error) {
+    req.flash('error', 'Something went wrong!')
     res.status(400).redirect('/user/dashboard');
   }
 };
