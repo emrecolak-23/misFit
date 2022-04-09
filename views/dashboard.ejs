@@ -460,7 +460,24 @@
                   
                 </tbody>
               </table>
+              <h1 class="text-white">About Info</h1> 
+              <table class="table">
+                <thead>
+                  <tr class="text-white">
+                    <th scope="col">Detail</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Update</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="text-white">
+                    <th scope="row"><%= about[0].detail.substring(0,50)  %></th>
+                    <td><%= about[0].image  %></td>
+                    <td><a data-toggle="modal" data-target="#addAboutInfo" class="btn btn-outline-warning btn-sm text-uppercase">Update</a></td>
+                  </tr>
 
+                </tbody>
+              </table>
             </div>
             <!-- Add Workout Modal -->
             <div
@@ -536,6 +553,7 @@
                 </div>
               </div>
             </div>
+            <!-- End Add Workout Modal -->
             <!-- Upload New Image -->
             <div
               class="modal fade"
@@ -581,6 +599,7 @@
                 </div>
               </div>
             </div>
+            <!-- End Upload New Image -->
             <!-- Add New Category -->
             <div
               class="modal fade"
@@ -627,8 +646,8 @@
                 </div>
               </div>
             </div>
+            <!-- End Add New Category -->
             <!-- Update Contact Info -->
-            <!-- Add New Category -->
             <div
               class="modal fade"
               id="addContactInfo"
@@ -692,6 +711,54 @@
                 </div>
               </div>
             </div>
+            <!-- End Update Contact Info -->
+            <!-- Update About Info -->
+            <div
+              class="modal fade"
+              id="addAboutInfo"
+              tabindex="-1"
+              role="dialog"
+              aria-labelledby="myModalLabel"
+            >
+              <div
+                class="modal-dialog modal-dialog-centered modal-lg"
+                role="document"
+              >
+                <div class="modal-content">
+                  <div class="modal-body customer-box">
+                    <!-- Tab Panes -->
+                    <div class="tab-content">
+                      <div class="tab-pane active" id="Login">
+                        <form
+                          method="post"
+                          action="/abouts/<%= about[0]._id %>?_method=PUT"
+                          class="tm-contact-form"
+                        > 
+                          <div class="form-group mb-3">
+                            <textarea
+                              rows="8"
+                              name="detail"
+                              class="form-control rounded-0"
+                              placeholder="Workout Description"
+                              required
+                            ><%= about[0].detail  %></textarea>
+                          </div>
+                          <div class="form-group mb-0">
+                            <button
+                              type="submit"
+                              class="btn btn-primary rounded-0 d-block ml-auto mr-0 tm-btn-animate tm-btn-submit tm-icon-submit"
+                            >
+                              <span>Update</span>
+                            </button>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Update About Info -->
           </div>
         </div>
       </div>

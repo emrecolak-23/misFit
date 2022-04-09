@@ -13,6 +13,7 @@ const CategoryRouter = require('./routes/CategoryRoutes');
 const UserRouter = require('./routes/UserRoutes');
 const GalleryRouter = require('./routes/GalleryRoutes');
 const ContactRouter = require('./routes/ContactRoutes');
+const AboutRouter = require('./routes/AboutRoutes');
 // Declare Express App
 const app = express();
 
@@ -70,6 +71,7 @@ app.use('/category', CategoryRouter);
 app.use('/user', UserRouter);
 app.use('/images', GalleryRouter);
 app.use('/contacts', ContactRouter);
+app.use('/abouts', AboutRouter);
 // Declare Port
 const PORT = 16000;
 // Listen Server

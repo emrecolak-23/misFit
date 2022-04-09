@@ -6,6 +6,7 @@ const Category = require('../models/Category');
 const Workout = require('../models/Workout');
 const Gallery = require('../models/Gallery');
 const Contact = require('../models/Contact');
+const About = require('../models/About');
  
 // Import Logger
 const logger = require('../logger/User');
@@ -76,11 +77,11 @@ exports.getDashboardPage = async (req, res) => {
     const categories = await Category.find();
     const workouts = await Workout.find({user:req.session.userID});
     const contact = await Contact.find().limit(1);
-
     // for admin
     const users = await User.find();
     const allWorkouts = await Workout.find();
     const images = await Gallery.find();
+    const about = await About.find().limit(1);
 
     res.status(200).render('dashboard', {
       page_name: 'dashboard',
@@ -90,7 +91,8 @@ exports.getDashboardPage = async (req, res) => {
       users,
       allWorkouts,
       images,
-      contact
+      contact,
+      about
     })
 
   } catch(error) {

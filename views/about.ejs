@@ -17,17 +17,18 @@
       <div class="about">
          <div class="container">
             <div class="row d_flex">
+               <% if (about[0]) {  %> 
                <div class="col-md-5">
                   <div class="titlepage">
-                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using  </p>
-                     <a class="read_more" href="Javascript:void(0)">Raed More</a>
+                     <p><%= about[0].detail %></p>
                   </div>
                </div>
                <div class="col-md-7">
                   <div class="about_img">
-                     <figure><img src="images/about.jpg" alt="#"/></figure>
+                     <figure><img src="/about/<%= about[0].image  %>" alt="#"/></figure>
                   </div>
                </div>
+               <% } %> 
             </div>
          </div>
       </div>

@@ -5,7 +5,7 @@ const User = require('../models/User');
 const Workout = require('../models/Workout');
 const Gallery = require('../models/Gallery');
 const Contact = require('../models/Contact');
-
+const About = require('../models/About');
 
 exports.getHomePage = async (req, res) => {
   try {
@@ -13,12 +13,14 @@ exports.getHomePage = async (req, res) => {
     const workouts = await Workout.find().sort('-createdAt').limit(3);
     const images = await Gallery.find().limit(3);
     const contact = await Contact.find().limit(1);
+    const about = await About.find().limit(1);
     res.status(200).render('index', {
       page_name: 'index',
       trainers,
       workouts,
       images,
-      contact
+      contact,
+      about
     });
   } catch (error) {
     res.status(400).json({
@@ -32,9 +34,12 @@ exports.getAboutPage = async (req, res) => {
   try {
     const contact = await Contact.find().limit(1);
 
+    const about = await About.find().limit(1);
+
     res.status(200).render('about', {
       page_name: 'about',
-      contact
+      contact,
+      about
     });
   } catch (error) {
     res.status(400).json({
