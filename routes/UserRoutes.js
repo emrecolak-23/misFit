@@ -23,11 +23,15 @@ const AuthMiddlewares = require('../middlewares/authMiddlewares');
 // Import Controllers
 const AuthController = require('../controllers/AuthController');
 
+// Import Validate Middlewares
+const validate = require('../middlewares/validate')
+// Import Validations
+const schema = require('../validations/User');
 // Create express router
 const router = express.Router();
 
-router.route('/register').post(AuthController.registerUser);
-router.route('/login').post(AuthController.loginUser);
+router.route('/register').post(validate(schema.registerValidation,'/register'),AuthController.registerUser);
+router.route('/login').post(validate(schema.loginValidation,'/login'),AuthController.loginUser);
 router.route('/logout').get(AuthController.logout);
 router.route('/dashboard').get(AuthMiddlewares,AuthController.getDashboardPage);
 router.route('/upload').put(upload,AuthController.uploadProfileImage);
