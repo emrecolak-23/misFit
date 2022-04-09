@@ -121,6 +121,7 @@ exports.deleteUser = async (req, res) => {
   try {
 
     const user = await User.findByIdAndDelete(req.params.id);
+    await Workout.deleteMany({user: req.params.id});
     res.status(200).redirect('/user/dashboard');
   } catch(error) {
     logger.log({
